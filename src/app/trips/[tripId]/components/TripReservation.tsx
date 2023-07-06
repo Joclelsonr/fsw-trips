@@ -34,7 +34,9 @@ function TripReservation({ trip }: TripReservationProps) {
         <p className="font-medium text-sm text-primaryDarker">R$2500</p>
       </div>
 
-      <Button className="mt-5">Reservar agora</Button>
+      <div className="pb-10 border-b border-b-primaryGrayLight w-full">
+        <Button className="mt-3 w-full">Reservar agora</Button>
+      </div>
     </div>
   );
 }
