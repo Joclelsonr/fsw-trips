@@ -1,22 +1,31 @@
-import { AuthProvider } from '@/providers/auth'
-import { Poppins } from 'next/font/google'
-import './globals.css'
+import { AuthProvider } from "@/providers/auth";
+import { Poppins } from "next/font/google";
+import "./globals.css";
+import Header from "../components/Header";
 
-const poppins = Poppins({ subsets: ['latin'], weight: ["400", "500", "600", "700", "800"] })
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+});
 
 export const metadata = {
-  title: 'FSW Trips',
-  description: 'Sistema de reservas de viagens',
-}
+  title: "FSW Trips",
+  description: "Sistema de reservas de viagens",
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="pt">
       <body className={poppins.className}>
         <AuthProvider>
-        {children}
+          <Header />
+          {children}
         </AuthProvider>
-        </body>
+      </body>
     </html>
-  )
+  );
 }

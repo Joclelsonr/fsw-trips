@@ -1,10 +1,12 @@
 "use client";
 
-export default function Home() {
+import React from "react";
+import TripSearch from "./components/TripSearch";
 
+export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-    </div>
-  )
+    <>
+      <TripSearch />
+    </>
+  );
 }
