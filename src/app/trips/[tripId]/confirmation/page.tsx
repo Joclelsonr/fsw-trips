@@ -40,6 +40,9 @@ function TripConfirmation({
       }),
     });
     const res = await response.json();
+
+    if (res.error) return router.push("/");
+
     setTrip(res.trip);
     setTotalPrice(res.totalPrice);
   };
