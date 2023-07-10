@@ -17,14 +17,14 @@ function Mytrips() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      return router.push("/login");
+      return router.push("/");
     }
 
     fetchReservation();
   }, [status]);
 
   async function fetchReservation() {
-    const response = await fetch(`/api/user/${(data?.user as any).id}/trips`);
+    const response = await fetch(`/api/user/${(data?.user as any)?.id}/trips`);
     const json = await response.json();
     setReservations(json);
   }
@@ -40,6 +40,7 @@ function Mytrips() {
             <UserReservationItem
               key={reservation.id}
               reservation={reservation}
+              fetchReservations={fetchReservation}
             />
           ))}
         </div>
