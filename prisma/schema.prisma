@@ -39,6 +39,7 @@ model TripReservetion {
   startDate DateTime
   endDate   DateTime
   totalPaid Decimal  @db.Decimal(8, 2)
+  guests    Int      @default(5)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
