@@ -1,11 +1,11 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
 
-import TripDetailHeader from "./components/TripDetailHeader";
-import TripReservation from "./components/TripReservation";
-import TripDescription from "./components/TripDescription";
-import TripHighlights from "./components/TripHighlights";
-import TripLocation from "./components/TripLocation";
+import TripDetailHeader from "./confirmation/components/TripDetailHeader";
+import TripReservation from "./confirmation/components/TripReservation";
+import TripDescription from "./confirmation/components/TripDescription";
+import TripHighlights from "./confirmation/components/TripHighlights";
+import TripLocation from "./confirmation/components/TripLocation";
 
 const getTripDetails = async (tripId: string) => {
   const trip = await prisma.trip.findUnique({

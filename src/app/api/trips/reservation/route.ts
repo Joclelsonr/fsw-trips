@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const req = await request.json();
-
   const { startDate, endDate, userId, tripId, totalPaid, guests } = req;
 
   const trip = await prisma.trip.findUnique({
@@ -28,7 +27,7 @@ export async function POST(request: Request) {
       userId,
       tripId,
       totalPaid,
-      guests,
+      // guests,
     },
   });
 
