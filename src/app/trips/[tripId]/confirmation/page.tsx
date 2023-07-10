@@ -10,6 +10,7 @@ import { ptBR } from "date-fns/locale";
 import Image from "next/image";
 import Button from "@/components/Button";
 import { Trip } from "@prisma/client";
+import { toast } from "react-toastify";
 
 function TripConfirmation({
   params,
@@ -20,7 +21,7 @@ function TripConfirmation({
   const router = useRouter();
   const [trip, setTrip] = useState<Trip | null>();
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const { status } = useSession();
+  const { status, data } = useSession();
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -48,6 +49,30 @@ function TripConfirmation({
   };
 
   if (!trip) return null;
+
+  const handleBuyClick = async () => {
+    const response = await fetch(`/api/trips/reservation`, {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          tripId: params.tripId,
+          startDate: searchParams.get("startDate"),
+          endDate: searchParams.get("endDate"),
+          guests: Number(searchParams.get("guests")),
+          userId: (data?.user as any)?.id,
+          totalPaid: totalPrice,
+        })
+      ),
+    });
+
+    if (!response.ok)
+      return toast.error("Ocorreu um erro ao realizar a reserva!", {
+        position: "top-center",
+      });
+
+    router.push(`/`);
+    toast.success("Reserva realizada com sucesso!", { position: "top-center" });
+  };
 
   const startDate = new Date(searchParams.get("startDate") as string);
   const endDate = new Date(searchParams.get("endDate") as string);
@@ -101,7 +126,9 @@ function TripConfirmation({
         <h3 className="font-semibold mt-5">Hóspedes</h3>
         <p>{guests} hóspedes</p>
 
-        <Button className="mt-5">Finalizar Compra</Button>
+        <Button className="mt-5" onClick={handleBuyClick}>
+          Finalizar Compra
+        </Button>
       </div>
     </div>
   );
